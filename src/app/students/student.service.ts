@@ -17,7 +17,7 @@ export class StudentService {
     return this.httpClient.get<Student[]>(this.studentUrl+"/Students");
   }
   getStudent(studentId: string):Observable<Student> {
-    return this.httpClient.get<Student>(this.studentUrl+"/students/"+studentId)
+    return this.httpClient.get<Student>(this.studentUrl+"/students/"+studentId);
   }
   updateStudent(studentId:string,studentRequest:Student):Observable<Student> {
     const UpdateStudentRequest: UpdateStudentRequestModel = {
@@ -31,5 +31,8 @@ export class StudentService {
       postalAddress:studentRequest.address.postalAddress
     }
     return this.httpClient.put<Student>(this.studentUrl+"/students/"+studentId,UpdateStudentRequest)
+}
+deleteStudent(studentId: string):Observable<Student> {
+    return this.httpClient.delete<Student>(this.studentUrl+"/Students/"+studentId);
 }
 }
