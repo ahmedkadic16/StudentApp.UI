@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1>View Student</h1>
+    <h1>{{this.header}}</h1>
   </div>
 </div>
 
@@ -88,9 +88,12 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <div class="row between-xs">
+              <div class="row between-xs" *ngIf="!isNewStudent">
               <button (click)="onUpdate()"mat-raised-button color="primary">Update data</button>
               <button (click)="onDelete()"mat-raised-button color="warn">Delete data</button>
+              </div>
+              <div class="row between-xs" *ngIf="isNewStudent">
+                <button (click)="onAdd()" mat-raised-button color="warn">Add student</button>
               </div>
             </div>
           </div>

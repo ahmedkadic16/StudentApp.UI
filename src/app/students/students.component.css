@@ -16,3 +16,6 @@ table {
 .search-input:focus {
   border:1px solid #AAA;
 }
+.m1 {
+  margin-left: 1em;
+}

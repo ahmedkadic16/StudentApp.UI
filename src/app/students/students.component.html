@@ -11,6 +11,7 @@
              [(ngModel)]="filterString"
       (keyup)="filterStudents()"
       >
+      <a class="m1" mat-raised-button color="primary" routerLink="/students/add">Add sew student</a>
     </div>
   </div>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">

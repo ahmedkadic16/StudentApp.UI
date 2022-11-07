@@ -37,7 +37,9 @@ export class ViewStudentComponent implements OnInit {
       postalAddress:'',
     }
   };
+  isNewStudent = true;
   genderList:Gender[] = [];
+  header = "";
 
 
   ngOnInit(): void {
@@ -47,16 +49,26 @@ export class ViewStudentComponent implements OnInit {
        this.studentId= params.get('id');
 
        if(this.studentId) {
-         this.studentService.getStudent(this.studentId)
-           .subscribe(
-             (successResponse) => {
-               this.student=successResponse;
-             } );
+        //if route contains /add then add
+        if(this.studentId.toLowerCase() === 'Add'.toLowerCase()) {
+          this.isNewStudent = true;
+          this.header="Add new student";
+        }
+        else {
+          this.isNewStudent = false;
+          this.header = "Edit student";
+          this.studentService.getStudent(this.studentId)
+            .subscribe(
+              (successResponse) => {
+                this.student=successResponse;
+              } );
+        }
             this.genderServie.getGenders()
               .subscribe( (successResponse)=>
                 this.genderList = successResponse);
        }
       })
+
   }
   onUpdate(): void {
     this.studentService.updateStudent(this.student.id,this.student)
@@ -80,5 +92,21 @@ export class ViewStudentComponent implements OnInit {
           this.router.navigateByUrl('students')
         },1000);
       })
+  }
+
+  onAdd() {
+    this.studentService.addStudent(this.student)
+      .subscribe((successResponse) => {
+        this.snackBar.open("Student added sucessfully", undefined, {
+          duration: 2000
+        });
+        setTimeout(() => {
+          this.router.navigateByUrl(`students/${successResponse.id}`)
+        }, 2000);
+
+      },
+        (error) => {
+
+        });
   }
 }
