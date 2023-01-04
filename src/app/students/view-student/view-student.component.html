@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" xmlns="http://www.w3.org/1999/html">
   <div class="container">
     <h1>{{this.header}}</h1>
   </div>
@@ -97,15 +97,21 @@
               </div>
             </div>
           </div>
-
-
         </form>
-
       </div>
       <div class="col-xs-6">
-        <!--image -->
+        <div class="row center-xs">
+          <div class="image-container">
+            <img [src]="displayProfileImageUrl" alt="Profile image">
+         </div>
+        </div>
+      <div class="row">
+        <div class="col-xs-12 row center-xs" id="mt5">
+          <input hidden type="file" #imageUpload (change)="uploadImage($event)">
+          <button *ngIf="!isNewStudent" mat-raised-button color="primary" (click)="imageUpload.click()">Change image</button>
+        </div>
       </div>
-
+      </div>
     </div>
   </div>
 

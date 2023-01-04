@@ -4,3 +4,21 @@
 .mat-form-field {
   width: 100%;
 }
+.image-container {
+  height: 200px;
+  width: 200px;
+  border: 2px solid gray;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 200px;
+}
+#mt5 {
+  margin-top: 10px;
+}
+

@@ -13,11 +13,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ViewStudentComponent implements OnInit {
   studentId:string |null | undefined;
-  constructor(private studentService:StudentService,
-              private route:ActivatedRoute,
-              private router:Router,
-              private genderServie:GenderService,
-  private snackBar:MatSnackBar) { }
   student:Student = {
     id:'',
     firstName:'',
@@ -40,6 +35,13 @@ export class ViewStudentComponent implements OnInit {
   isNewStudent = true;
   genderList:Gender[] = [];
   header = "";
+  displayProfileImageUrl='';
+
+  constructor(private studentService:StudentService,
+              private route:ActivatedRoute,
+              private router:Router,
+              private genderServie:GenderService,
+  private snackBar:MatSnackBar) { }
 
 
   ngOnInit(): void {
@@ -53,6 +55,7 @@ export class ViewStudentComponent implements OnInit {
         if(this.studentId.toLowerCase() === 'Add'.toLowerCase()) {
           this.isNewStudent = true;
           this.header="Add new student";
+          this.setImage();
         }
         else {
           this.isNewStudent = false;
@@ -61,7 +64,12 @@ export class ViewStudentComponent implements OnInit {
             .subscribe(
               (successResponse) => {
                 this.student=successResponse;
-              } );
+                this.setImage();
+              },
+              (errorResponse) =>  {
+                this.setImage();
+              }
+              );
         }
             this.genderServie.getGenders()
               .subscribe( (successResponse)=>
@@ -82,6 +90,7 @@ export class ViewStudentComponent implements OnInit {
               }
         );
   }
+
   onDelete():void {
     this.studentService.deleteStudent(this.student.id)
       .subscribe((successResponse)=> {
@@ -108,5 +117,35 @@ export class ViewStudentComponent implements OnInit {
         (error) => {
 
         });
+  }
+
+  private setImage():void {
+    if(this.student.profileImageUrl) {
+      this.displayProfileImageUrl= this.studentService.getImagePath(this.student.profileImageUrl);
+    }
+    else {
+      this.displayProfileImageUrl='assets/defaultimg.png';
+    }
+
+  }
+
+  uploadImage(event:any):void {
+      if(this.studentId) {
+        const file:File= event.target.files[0];
+        this.studentService.uploadImage(this.studentId,file).subscribe(
+          (successResponse) => {
+            this.student.profileImageUrl = successResponse;
+            this.setImage();
+            this.snackBar.open("Image changed successfully",undefined,{
+              duration:2000
+            });
+
+          },
+          (errorResponse) => {
+
+          }
+        );
+
+      }
   }
 }

@@ -12,6 +12,7 @@ import {MatSort} from "@angular/material/sort";
 })
 export class StudentsComponent implements OnInit {
   students:Student[] = [];
+  
   constructor(private studentService: StudentService) { }
   displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email','mobileNumber','gender','Edit'];
   dataSource:MatTableDataSource<Student> = new MatTableDataSource<Student>();
@@ -38,7 +39,6 @@ export class StudentsComponent implements OnInit {
         }
         );
   }
-
   filterStudents() {
     this.dataSource.filter = this.filterString.trim().toLowerCase();
   }
