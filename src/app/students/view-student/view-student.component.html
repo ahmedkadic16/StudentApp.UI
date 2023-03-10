@@ -23,13 +23,15 @@
             <div class="col-xs-6">
               <mat-form-field>
                 <mat-label>First Name</mat-label>
-                <input type="text" matInput [(ngModel)]="student.firstName" name="firstName">
+                <input required type="text" matInput [(ngModel)]="student.firstName" name="firstName">
+                <mat-error>First name is required!</mat-error>
               </mat-form-field>
             </div>
             <div class="col-xs-6">
               <mat-form-field>
                 <mat-label>Last Name</mat-label>
-                <input type="text" matInput [(ngModel)]="student.lastName" name="lastName">
+                <input required type="text" matInput [(ngModel)]="student.lastName" name="lastName">
+                <mat-error>Last name is required!</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -48,13 +50,15 @@
             <div class="col-xs-6">
               <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input type="text" matInput [(ngModel)]="student.email" name="email">
+                <input required type="text" matInput [(ngModel)]="student.email" name="email">
+                <mat-error>Email is required!</mat-error>
               </mat-form-field>
             </div>
             <div class="col-xs-6">
               <mat-form-field>
                 <mat-label>Phone Number</mat-label>
-                <input type="text" matInput [(ngModel)]="student.mobile" name="mobile">
+                <input required type="text" matInput [(ngModel)]="student.mobile" name="mobile">
+                <mat-error>Number is required!</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -62,11 +66,12 @@
             <div class="col-xs-12">
               <mat-form-field>
               <mat-label>Gender</mat-label>
-              <mat-select [(ngModel)]="student.genderId" name="gender">
+              <mat-select required [(ngModel)]="student.genderId" name="gender">
                 <mat-option *ngFor="let gender of genderList" [value]="gender.id">
                     {{gender.description}}
                 </mat-option>
               </mat-select>
+                <mat-error>Gender is required!</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -74,7 +79,8 @@
             <div class="col-xs-12">
               <mat-form-field>
               <mat-label>Physical address</mat-label>
-              <textarea matInput [(ngModel)]="student.address.physicalAddress" name="physicalAddress"></textarea>
+              <textarea required matInput [(ngModel)]="student.address.physicalAddress" name="physicalAddress"></textarea>
+              <mat-error>Field is required!</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -82,7 +88,8 @@
             <div class="col-xs-12">
               <mat-form-field>
               <mat-label>Postal address</mat-label>
-              <textarea matInput [(ngModel)]="student.address.postalAddress" name="postalAddress"></textarea>
+              <textarea required matInput [(ngModel)]="student.address.postalAddress" name="postalAddress"></textarea>
+                <mat-error>Field is required!</mat-error>
               </mat-form-field>
             </div>
           </div>
